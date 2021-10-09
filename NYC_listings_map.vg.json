@@ -5,13 +5,13 @@
     "projection": {"type": "mercator"},
     "layer": [
       { "data" : {
-        "url" : "https://raw.githubusercontent.com/Tjefferson11/Homework10/main/2010%20Neighborhood%20Tabulation%20Areas%20(NTAs).json",
+        "url" : "javascript/2010 Neighborhood Tabulation Areas (NTAs).json",
         "format" : {"type" : "topojson", "feature": "2010 Neighborhood Tabulation Areas (NTAs)"}
     },
-    "mark": {"type": "geoshape", "fill": "#969696","stroke": "black"}
+    "mark": {"type": "geoshape", "fill": "#252525","stroke": "black"}
     },
     {"data": {
-    "url": "https://raw.githubusercontent.com/Tjefferson11/Homework10/main/neighbourhoods.json",
+    "url": "javascript/neighbourhoods.json",
         "format": {"type": "topojson", "feature": "neighbourhoods"}
       },
       "transform": [
@@ -19,7 +19,7 @@
           "lookup": "properties.neighbourhood",
                 "from": {
                   "data": {
-                    "url": "https://raw.githubusercontent.com/Tjefferson11/Homework10/main/listings.csv"
+                    "url": "dataset/listings_group.csv"
                   },
                   "key": "neighbourhood",
                   "fields": ["neighbourhood","neighbourhood_group","Total_listings","Avg_price","population0010", "population1020"]
@@ -33,7 +33,7 @@
       "color": {
         "field": "Listings per 100,000 Population",
         "type": "quantitative",
-        "scale": {"type" : "threshold", "domain" : [0.5, 1.5, 3, 4],"range" : ["#d9d9d9","#fee5d9","#fcbba1","#fc9272","#fb6a4a","#de2d26","#a50f15"]}
+        "scale": {"type" : "threshold", "domain" : [0.5, 1.5, 3, 4],"range" : ["#252525","#fb6a4a","#ef3b2c","#cb181d","#99000d"]}
       },
       "tooltip": [
         {"field": "neighbourhood_group", "type": "nominal", "title": "Borough Areas"},
