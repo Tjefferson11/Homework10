@@ -1,0 +1,48 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json", "title": "New York Neighbourhood Airbnb Listings",
+    "width": 1000,
+    "height": 1000,
+    "projection": {"type": "mercator"},
+    "layer": [
+      { "data" : {
+        "url" : "javascript/2010 Neighborhood Tabulation Areas (NTAs).json",
+        "format" : {"type" : "topojson", "feature": "2010 Neighborhood Tabulation Areas (NTAs)"}
+    },
+    "mark": {"type": "geoshape", "fill": "#969696","stroke": "black"}
+    },
+    {"data": {
+    "url": "javascript/neighbourhoods.json",
+        "format": {"type": "topojson", "feature": "neighbourhoods"}
+      },
+      "transform": [
+        {
+          "lookup": "properties.neighbourhood",
+                "from": {
+                  "data": {
+                    "url": "dataset/listings_group.csv"
+                  },
+                  "key": "neighbourhood",
+                  "fields": ["neighbourhood","neighbourhood_group","Total_listings","Avg_price","population0010", "population1020"]
+              } },
+          {"calculate": "datum.Total_listings/datum.population1020 * 100000",
+            "as": "Listings per 100,000 Population"
+            
+            }],
+      "mark": {"type": "geoshape", "stroke": "black"},
+    "encoding": {
+      "color": {
+        "field": "Listings per 100,000 Population",
+        "type": "quantitative",
+        "scale": {"type" : "threshold", "domain" : [0.5, 1.5, 3, 4],"range" : ["#d9d9d9","#fee5d9","#fcbba1","#fc9272","#fb6a4a","#de2d26","#a50f15"]}
+      },
+      "tooltip": [
+        {"field": "neighbourhood_group", "type": "nominal", "title": "Borough Areas"},
+        {"field": "neighbourhood", "type": "nominal", "title": "Neighbourhood Tabulation Areas"}, 
+        {"field": "Total_listings", "type": "quantitative", "title" : "Total Listings"}]
+    
+    } 
+    }
+
+  ]
+
+}

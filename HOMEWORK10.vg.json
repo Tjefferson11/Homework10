@@ -1,0 +1,93 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+     "width": 500,
+    "height": 400,
+    "title": "New York City Airbnb Listings Reviews with",
+    "data": {
+        "url": "dataset/listings.csv"
+      },
+      "params": [
+        {
+          "name": "NYC_Borough",
+    "bind": {
+      "input": "select",
+      "options": [
+        null,
+        "Manhattan",
+        "Bronx",
+        "Staten Island",
+        "Queens",
+        "Brooklyn"
+    ],
+    "labels":[
+        "Show All",
+        "Manhattan",
+        "Bronx",
+        "Staten Island",
+        "Queens",
+        "Brooklyn"
+    ],
+    "name": "NYC Borough classifier: "
+     } }
+      ],
+      "transform": [
+    {"filter": "datum.number_of_reviews> 0"},
+    {"filter": "datum.calculated_host_listings_count > 0"},
+    {"filter": "NYC_Borough == null || datum.neighbourhood_group ==  NYC_Borough"}],
+      "selection": {
+            "neigh_highlight": {
+              "type": "multi",
+              "fields": ["neigbourhood_group"],
+              "bind": "legend"
+    } },
+     "mark": "circle",
+    "encoding": {
+      "x": {
+        "field": "calculated_host_listings_count",
+        "type": "quantitative",
+        "title": "Calculated Host Listings Count",
+        "axis": {"tickCount": 7}
+    }, "y": {
+        "field": "number_of_reviews",
+        "type": "quantitative",
+        "axis": {"tickCount": 6}
+     }, "color": {
+          "field": "neighbourhood_group",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+                "Manhattan",
+                "Bronx",
+                "Staten Island",
+                "Queens",
+                "Brooklyn"],
+             "range": [
+                "#e41a1c",
+                "#984ea3",
+                "#ff7f00",
+                "#a6cee3",
+                "#377eb8",
+                "#a65628"] }
+    },
+    "opacity": {
+          "condition": {"selection": "neigh_highlight", "value": 0.6},
+          "value": 0.2
+    },
+    "size": {
+          "field": "price",
+          "type": "quantitative",
+          "scale": {
+    "type": "threshold",
+    "domain": [10, 100, 1000, 5000, 9999], "range": [10, 100, 500, 850, 1500, 2000]
+    },
+          "legend": {"format": ".1s"}
+    },
+    "tooltip": [
+    {"field": "neighbourhood", "type": "nominal"},
+    {"field": "neighbourhood_group", "type": "nominal"},
+    {"field": "number_of_reviews", "type": "quantitative", "format": ","},
+    {"field": "calculated_host_listings_count", "type": "quantitative", "format": ","}, 
+    {"field": "price", "type": "quantitative", "format": ","}]
+    
+    }
+ }

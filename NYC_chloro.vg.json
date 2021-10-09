@@ -1,0 +1,38 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json", "title": "New York NTA Airbnb Listings per 100,000 Population ",
+    "width": 800,
+    "height": 600,
+    "projection": {"type": "mercator"},
+    "data": {
+    "url": "https://raw.githubusercontent.com/Tjefferson11/3179-Tjfferson11/main/2010%20Neighborhood%20Tabulation%20Areas%20(NTAs).json",
+        "format": {"type": "topojson", "feature": "2010 Neighborhood Tabulation Areas (NTAs)"}
+      },
+      "transform": [
+        {
+    "lookup": "properties.ntaname",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/Tjefferson11/3179-Tjfferson11/main/NYC_group_listings.csv"
+            },
+            "key": "NTAName",
+            "fields": ["NTAName","neighbourhood_group","listings","population0010","population1020"]
+        } },
+{"calculate": "datum.listings/datum.population1020 * 100000", "as": "Listings per 100,000 population"} ],
+      "mark": {"type": "geoshape"},
+    "encoding": {
+      "color": {
+        "field": "Listings per 100,000 population",
+        "type": "quantitative",
+        "scale": {"type" : "threshold", "domain" : [0.5,1.5,3,4],"range" : ["#fee5d9", "#fcae91", "#fb6a4a", "#de2d26", "#a50f15"]}
+      },
+      "tooltip": [
+        {"field": "properties.boro_name", "type": "nominal", "title": "Borough Areas"},
+        {"field": "properties.ntaname", "type": "nominal", "title": "Neighbourhood Tabulation Areas"}, 
+        {"field": "listings", "type": "quantitative", "title" : "Total Listings"},
+        {"field": "population1020", "type": "quantitative", "title" : "Projected Population from 2010 - 2020"},
+        {"field": "Listings per 100,000 population", "type": "quantitative", "format": ".2f", "title": "Listings per 100,000 Population"} ]
+    
+    } 
+
+
+}
