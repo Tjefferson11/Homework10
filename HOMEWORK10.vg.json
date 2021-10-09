@@ -4,7 +4,7 @@
     "height": 400,
     "title": "New York City Airbnb Listings Reviews with",
     "data": {
-        "url": "dataset/listings.csv"
+        "url": "https://raw.githubusercontent.com/Tjefferson11/Homework10/main/listings.csv"
       },
       "params": [
         {
