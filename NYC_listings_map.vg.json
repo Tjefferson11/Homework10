@@ -5,13 +5,13 @@
     "projection": {"type": "mercator"},
     "layer": [
       { "data" : {
-        "url" : "javascript/2010 Neighborhood Tabulation Areas (NTAs).json",
+        "url" : "https://raw.githubusercontent.com/Tjefferson11/Homework10/main/2010%20Neighborhood%20Tabulation%20Areas%20(NTAs).json",
         "format" : {"type" : "topojson", "feature": "2010 Neighborhood Tabulation Areas (NTAs)"}
     },
     "mark": {"type": "geoshape", "fill": "#252525","stroke": "black"}
     },
     {"data": {
-    "url": "javascript/neighbourhoods.json",
+    "url": "https://raw.githubusercontent.com/Tjefferson11/Homework10/main/neighbourhoods.json",
         "format": {"type": "topojson", "feature": "neighbourhoods"}
       },
       "transform": [
@@ -19,7 +19,7 @@
           "lookup": "properties.neighbourhood",
                 "from": {
                   "data": {
-                    "url": "dataset/listings_group.csv"
+                    "url": "https://raw.githubusercontent.com/Tjefferson11/Homework10/main/listings_group.csv"
                   },
                   "key": "neighbourhood",
                   "fields": ["neighbourhood","neighbourhood_group","Total_listings","Avg_price","population0010", "population1020"]
